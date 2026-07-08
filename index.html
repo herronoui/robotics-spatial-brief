@@ -12,8 +12,11 @@
       --green: #2d4a3e; --green-dark: #1e3329; --cream: #f2e3c9;
       --orange: #d97a4a; --orange-light: #e8956a; --charcoal: #1c1c1c;
       --text: #2a2a2a; --text-light: #f2e3c9;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: "DM Sans", system-ui, sans-serif;
       background: var(--cream); color: var(--text); line-height: 1.65;
@@ -25,45 +28,121 @@
     }
     h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 900; }
 
+    /* ── Scroll progress ── */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--orange), var(--orange-light));
+      z-index: 10000; transition: width 0.1s linear;
+    }
+
+    /* ── Nav ── */
     nav {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1.25rem 2rem; position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+      padding: 1.25rem 2rem;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      transition: background 0.35s var(--ease-out), box-shadow 0.35s, padding 0.35s;
     }
-    .logo { font-family: "Fraunces", serif; font-weight: 900; font-size: 1.1rem; color: var(--green); }
+    nav.scrolled {
+      background: rgba(242, 227, 201, 0.92);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 24px rgba(45, 74, 62, 0.08);
+      padding: 0.85rem 2rem;
+    }
+    .section-charcoal ~ .section-charcoal nav,
+    nav.over-dark { background: rgba(28, 28, 28, 0.92); }
+    .logo {
+      font-family: "Fraunces", serif; font-weight: 900; font-size: 1.1rem;
+      color: var(--green); transition: transform 0.3s var(--ease-pop);
+    }
+    .logo:hover { transform: scale(1.05); }
     .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-    .nav-links a { color: var(--green); text-decoration: none; font-size: 0.85rem; font-weight: 500; opacity: 0.85; }
+    .nav-links a {
+      color: var(--green); text-decoration: none; font-size: 0.85rem; font-weight: 500;
+      opacity: 0.85; position: relative; transition: opacity 0.2s;
+    }
+    .nav-links a::after {
+      content: ""; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+      background: var(--orange); transition: width 0.3s var(--ease-out);
+    }
     .nav-links a:hover { opacity: 1; }
+    .nav-links a:hover::after { width: 100%; }
 
+    /* ── Reveal animations ── */
+    .reveal {
+      opacity: 0;
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    .reveal-up { transform: translateY(48px); }
+    .reveal-down { transform: translateY(-32px); }
+    .reveal-left { transform: translateX(-56px); }
+    .reveal-right { transform: translateX(56px); }
+    .reveal-scale { transform: scale(0.88); }
+    .reveal-pop { transform: scale(0.7); transition-timing-function: var(--ease-pop); }
+    .reveal.visible {
+      opacity: 1;
+      transform: translate(0) scale(1);
+    }
+    .stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
+    .stagger > .reveal:nth-child(2) { transition-delay: 80ms; }
+    .stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
+    .stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
+    .stagger > .reveal:nth-child(5) { transition-delay: 320ms; }
+    .stagger > .reveal:nth-child(6) { transition-delay: 400ms; }
+    .stagger > .reveal:nth-child(n+7) { transition-delay: 480ms; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .globe, .orbit, .dot { animation: none !important; }
+    }
+
+    /* ── Hero ── */
     .hero {
-      background: var(--cream); padding: 7rem 2rem 5rem;
-      border-radius: 0 0 4rem 4rem; position: relative;
+      background: var(--cream); padding: 8rem 2rem 5rem;
+      border-radius: 0 0 4rem 4rem; position: relative; min-height: 90vh;
+      display: flex; align-items: center;
     }
     .hero-inner {
-      max-width: 1100px; margin: 0 auto;
+      max-width: 1100px; margin: 0 auto; width: 100%;
       display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center;
     }
     .hero h1 {
       font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.1;
       color: var(--green); margin-bottom: 1rem;
     }
-    .hero h1 .hl { color: var(--orange); }
+    .hero h1 .hl {
+      color: var(--orange);
+      display: inline-block;
+    }
     .hero p { font-size: 1.05rem; color: #4a4a4a; max-width: 480px; margin-bottom: 1.5rem; }
     .btn {
       display: inline-block; background: var(--green); color: var(--cream);
       font-weight: 600; font-size: 0.85rem; padding: 0.65rem 1.5rem;
-      border-radius: 999px; text-decoration: none; transition: background 0.15s;
+      border-radius: 999px; text-decoration: none;
+      transition: background 0.2s, transform 0.25s var(--ease-pop), box-shadow 0.25s;
+      box-shadow: 0 4px 14px rgba(45, 74, 62, 0.2);
     }
-    .btn:hover { background: var(--green-dark); }
+    .btn:hover {
+      background: var(--green-dark);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(45, 74, 62, 0.28);
+    }
+    .btn:active { transform: scale(0.98); }
 
     .globe-art {
-      position: relative; height: 280px;
+      position: relative; height: 320px;
       display: flex; align-items: center; justify-content: center;
     }
     .globe {
       width: 220px; height: 220px; border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #3d6b5a, var(--green-dark));
       box-shadow: inset -20px -20px 40px rgba(0,0,0,0.3), 0 12px 40px rgba(0,0,0,0.2);
-      position: relative; overflow: hidden;
+      position: relative; overflow: hidden; z-index: 2;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
     }
     .globe::before {
       content: ""; position: absolute; inset: 0;
@@ -71,19 +150,32 @@
                   repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(242,227,201,0.06) 18px, rgba(242,227,201,0.06) 19px);
     }
     .orbit {
-      position: absolute; border: 2px dashed var(--orange); border-radius: 50%; opacity: 0.4;
+      position: absolute; border: 2px dashed var(--orange); border-radius: 50%;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
     }
-    .orbit.a { width: 280px; height: 280px; }
-    .orbit.b { width: 340px; height: 340px; opacity: 0.2; }
+    .orbit.a {
+      width: 280px; height: 280px; opacity: 0.4;
+      animation: spin 24s linear infinite;
+    }
+    .orbit.b {
+      width: 340px; height: 340px; opacity: 0.2;
+      animation: spin 36s linear infinite reverse;
+    }
+    @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
     .dot {
       position: absolute; width: 10px; height: 10px; border-radius: 50%;
       background: var(--orange); box-shadow: 0 0 12px var(--orange);
+      animation: pulse 2.5s ease-in-out infinite;
     }
-    .dot:nth-child(3) { top: 20%; left: 15%; }
-    .dot:nth-child(4) { top: 60%; right: 10%; }
-    .dot:nth-child(5) { bottom: 15%; left: 40%; }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.7; }
+    }
+    .dot:nth-child(4) { top: 18%; left: 12%; animation-delay: 0s; }
+    .dot:nth-child(5) { top: 58%; right: 8%; animation-delay: 0.8s; }
+    .dot:nth-child(6) { bottom: 12%; left: 38%; animation-delay: 1.6s; }
 
-    section { padding: 4.5rem 2rem; position: relative; }
+    section { padding: 5rem 2rem; position: relative; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
     .section-green { background: var(--green); color: var(--text-light); border-radius: 4rem; margin: -2rem 0; }
     .section-charcoal { background: var(--charcoal); color: var(--cream); border-radius: 4rem; margin: -2rem 0; }
@@ -98,6 +190,12 @@
     .pillar {
       background: rgba(255,255,255,0.08); border: 1px solid rgba(242,227,201,0.15);
       border-radius: 14px; padding: 1.15rem;
+      transition: transform 0.35s var(--ease-out), background 0.35s, border-color 0.35s;
+    }
+    .pillar:hover {
+      transform: translateY(-6px) scale(1.02);
+      background: rgba(255,255,255,0.14);
+      border-color: var(--orange);
     }
     .pillar h4 { font-family: "Fraunces", serif; color: var(--orange-light); margin-bottom: 0.35rem; font-size: 1rem; }
     .pillar p { font-size: 0.85rem; opacity: 0.85; line-height: 1.55; }
@@ -105,9 +203,14 @@
     .regions { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
     .region-card {
       background: rgba(255,255,255,0.55); border: 1px solid rgba(45,74,62,0.12);
-      border-radius: 16px; padding: 1.25rem; transition: transform 0.15s, border-color 0.15s;
+      border-radius: 16px; padding: 1.25rem;
+      transition: transform 0.35s var(--ease-out), border-color 0.35s, box-shadow 0.35s;
     }
-    .region-card:hover { transform: translateY(-2px); border-color: var(--orange); }
+    .region-card:hover {
+      transform: translateY(-8px) rotate(-0.5deg);
+      border-color: var(--orange);
+      box-shadow: 0 16px 40px rgba(45, 74, 62, 0.12);
+    }
     .region-card h3 { font-size: 1.05rem; color: var(--green); margin-bottom: 0.75rem; }
     .region-card ul { list-style: none; }
     .region-card li {
@@ -122,6 +225,11 @@
     .trend-card {
       background: rgba(255,255,255,0.12); border-radius: 14px; padding: 1.25rem;
       border-left: 4px solid var(--orange);
+      transition: transform 0.35s var(--ease-pop), box-shadow 0.35s;
+    }
+    .trend-card:hover {
+      transform: scale(1.04) translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.25);
     }
     .trend-card.spatial { border-left-color: #7ec8a8; }
     .trend-card h4 { font-family: "Fraunces", serif; font-size: 1rem; margin-bottom: 0.4rem; }
@@ -139,17 +247,19 @@
     .feed-item {
       background: rgba(255,255,255,0.06); border: 1px solid rgba(242,227,201,0.12);
       border-radius: 14px; padding: 1.1rem 1.25rem;
-      transition: border-color 0.15s, transform 0.15s;
+      transition: border-color 0.3s, transform 0.35s var(--ease-out), box-shadow 0.35s;
     }
-    .feed-item:hover { border-color: var(--orange); transform: translateX(4px); }
+    .feed-item:hover {
+      border-color: var(--orange);
+      transform: translateX(8px) scale(1.01);
+      box-shadow: -4px 8px 24px rgba(0,0,0,0.15);
+    }
     .feed-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.35rem; font-size: 0.72rem; opacity: 0.65; }
     .feed-item h3 { font-size: 1rem; line-height: 1.3; margin-bottom: 0.35rem; }
     .feed-item h3 a { color: inherit; text-decoration: none; }
     .feed-item h3 a:hover { color: var(--orange-light); }
     .feed-item p { font-size: 0.84rem; opacity: 0.8; line-height: 1.55; }
-    .section-cream .feed-item {
-      background: #fff; border-color: rgba(45,74,62,0.1);
-    }
+    .section-cream .feed-item { background: #fff; border-color: rgba(45,74,62,0.1); }
     .section-cream .feed-item h3 a { color: var(--green); }
     .section-cream .feed-item h3 a:hover { color: var(--orange); }
 
@@ -167,9 +277,11 @@
       max-width: 1100px; margin: 0 auto;
       display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
     }
-    footer a { color: var(--orange-light); text-decoration: none; }
+    footer a { color: var(--orange-light); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--cream); }
 
     @media (max-width: 768px) {
+      .hero { min-height: auto; padding-top: 6rem; }
       .hero-inner { grid-template-columns: 1fr; }
       .globe-art { height: 200px; }
       .nav-links { display: none; }
@@ -179,8 +291,10 @@
 </head>
 <body>
 
+  <div class="scroll-progress" id="scroll-progress"></div>
+
   <div class="hero">
-    <nav>
+    <nav id="nav">
       <div class="logo">brief.</div>
       <ul class="nav-links">
         <li><a href="#spatial">Spatial AI</a></li>
@@ -191,84 +305,82 @@
     </nav>
     <div class="hero-inner">
       <div>
-        <h1>Robotics &amp; <span class="hl">spatial intelligence</span>, explained.</h1>
-        <p>A readable digest of what's happening worldwide: humanoids, world models, 3D perception, and the labs and companies driving it all.</p>
-        <a class="btn" href="#spatial">Start reading</a>
+        <h1 class="reveal reveal-up visible" style="transition-delay:0ms">
+          Robotics &amp; <span class="hl">spatial intelligence</span>, explained.
+        </h1>
+        <p class="reveal reveal-up visible" style="transition-delay:120ms">
+          A readable digest of what's happening worldwide: humanoids, world models, 3D perception, and the labs and companies driving it all.
+        </p>
+        <a class="btn reveal reveal-up visible" href="#spatial" style="transition-delay:240ms">Start reading ↓</a>
       </div>
-      <div class="globe-art">
+      <div class="globe-art reveal reveal-scale visible" style="transition-delay:180ms" id="globe-wrap">
         <div class="orbit a"></div>
         <div class="orbit b"></div>
-        <div class="globe"></div>
+        <div class="globe" id="globe"></div>
         <div class="dot"></div><div class="dot"></div><div class="dot"></div>
       </div>
     </div>
   </div>
 
-  <!-- Spatial Intelligence explainer -->
   <section class="section-green" id="spatial">
     <div class="section-inner">
-      <h2 class="section-title" id="spatial-title">Spatial intelligence</h2>
-      <p class="section-sub" id="spatial-summary" style="color:rgba(242,227,201,0.8)"></p>
-      <p id="spatial-why" style="font-size:0.95rem;margin-bottom:0.5rem"></p>
-      <div class="pillars" id="pillars"></div>
+      <h2 class="section-title reveal reveal-up" id="spatial-title">Spatial intelligence</h2>
+      <p class="section-sub reveal reveal-up" id="spatial-summary" style="color:rgba(242,227,201,0.8);transition-delay:80ms"></p>
+      <p class="reveal reveal-up" id="spatial-why" style="font-size:0.95rem;margin-bottom:0.5rem;transition-delay:160ms"></p>
+      <div class="pillars stagger" id="pillars"></div>
     </div>
   </section>
 
-  <!-- Worldwide snapshot -->
   <section class="section-cream" id="world">
     <div class="section-inner">
-      <h2 class="section-title orange">Worldwide snapshot</h2>
-      <p class="section-sub">Where robotics and spatial AI are moving fastest, by region.</p>
-      <div class="regions" id="regions"></div>
+      <h2 class="section-title orange reveal reveal-left">Worldwide snapshot</h2>
+      <p class="section-sub reveal reveal-left" style="transition-delay:80ms">Where robotics and spatial AI are moving fastest, by region.</p>
+      <div class="regions stagger" id="regions"></div>
     </div>
   </section>
 
-  <!-- Trends -->
   <section class="section-charcoal">
     <div class="section-inner">
-      <h2 class="section-title" style="color:var(--orange)">Big trends right now</h2>
-      <p class="section-sub" style="color:rgba(242,227,201,0.65)">The themes showing up across labs, startups, and industry.</p>
-      <div class="trends" id="trends"></div>
+      <h2 class="section-title reveal reveal-up" style="color:var(--orange)">Big trends right now</h2>
+      <p class="section-sub reveal reveal-up" style="color:rgba(242,227,201,0.65);transition-delay:80ms">The themes showing up across labs, startups, and industry.</p>
+      <div class="trends stagger" id="trends"></div>
     </div>
   </section>
 
-  <!-- Quote -->
   <section class="section-orange">
     <div class="quote-banner">
-      <blockquote>Robotics is the body. Spatial intelligence is how it understands the room it's standing in.</blockquote>
+      <blockquote class="reveal reveal-pop">Robotics is the body. Spatial intelligence is how it understands the room it's standing in.</blockquote>
     </div>
   </section>
 
-  <!-- Robotics feed -->
   <section class="section-cream" id="robotics-feed">
     <div class="section-inner">
       <div class="feed-header">
         <div>
-          <h2 class="section-title orange">Robotics news</h2>
-          <p class="section-sub" style="margin-bottom:0">Hardware, humanoids, industry, and deployment.</p>
+          <h2 class="section-title orange reveal reveal-right">Robotics news</h2>
+          <p class="section-sub reveal reveal-right" style="margin-bottom:0;transition-delay:80ms">Hardware, humanoids, industry, and deployment.</p>
         </div>
-        <span class="updated" id="robotics-updated"></span>
+        <span class="updated reveal reveal-up" id="robotics-updated"></span>
       </div>
-      <div class="feed" id="robotics-feed-list"><p style="opacity:0.6">Loading…</p></div>
+      <div class="feed stagger" id="robotics-feed-list"><p style="opacity:0.6">Loading…</p></div>
     </div>
   </section>
 
-  <!-- Spatial feed -->
   <section class="section-charcoal" id="spatial-feed">
     <div class="section-inner">
       <div class="feed-header">
         <div>
-          <h2 class="section-title" style="color:var(--orange)">Spatial intelligence feed</h2>
-          <p class="section-sub" style="color:rgba(242,227,201,0.65);margin-bottom:0">World models, 3D perception, VLAs, and embodied AI.</p>
+          <h2 class="section-title reveal reveal-left" style="color:var(--orange)">Spatial intelligence feed</h2>
+          <p class="section-sub reveal reveal-left" style="color:rgba(242,227,201,0.65);margin-bottom:0;transition-delay:80ms">World models, 3D perception, VLAs, and embodied AI.</p>
         </div>
-        <span class="updated" id="spatial-updated"></span>
+        <span class="updated reveal reveal-up" id="spatial-updated"></span>
       </div>
-      <div class="feed" id="spatial-feed-list"><p style="opacity:0.6">Loading…</p></div>
+      <div class="feed stagger" id="spatial-feed-list"><p style="opacity:0.6">Loading…</p></div>
     </div>
   </section>
 
   <footer>
-    <div class="footer-inner">
+    <div class="footer-inner reveal reveal-up">
       <span class="logo" style="color:var(--cream)">brief.</span>
       <span>Curated by <a href="https://github.com/herronoui">Herron Nguyen</a></span>
       <span><a href="https://github.com/herronoui/robotics-spatial-brief">Source</a> · <a href="https://herronoui.github.io/reading-resources">Books</a></span>
@@ -276,6 +388,40 @@
   </footer>
 
   <script>
+    /* ── Scroll progress + nav ── */
+    const nav = document.getElementById("nav");
+    const progress = document.getElementById("scroll-progress");
+    const globeWrap = document.getElementById("globe-wrap");
+
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (scrollTop / docHeight * 100) + "%";
+      nav.classList.toggle("scrolled", scrollTop > 60);
+      if (globeWrap) {
+        globeWrap.style.transform = `translateY(${scrollTop * 0.12}px)`;
+      }
+    }, { passive: true });
+
+    /* ── Intersection Observer for reveals ── */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+    function observeReveals(root = document) {
+      root.querySelectorAll(".reveal:not(.visible)").forEach((el) => {
+        revealObserver.observe(el);
+      });
+    }
+
+    observeReveals();
+
+    /* ── Data loading ── */
     function timeAgo(iso) {
       if (!iso) return "";
       const h = Math.floor((Date.now() - new Date(iso)) / 3600000);
@@ -287,12 +433,10 @@
 
     function feedItem(item) {
       return `
-        <article class="feed-item">
+        <article class="feed-item reveal reveal-up">
           <div class="feed-meta">
-            <span>${item.region}</span>
-            <span>·</span>
-            <span>${item.voice}</span>
-            <span>·</span>
+            <span>${item.region}</span><span>·</span>
+            <span>${item.voice}</span><span>·</span>
             <span>${timeAgo(item.published)}</span>
           </div>
           <h3><a href="${item.url}" target="_blank" rel="noopener">${item.title}</a></h3>
@@ -309,27 +453,29 @@
       document.getElementById("spatial-summary").textContent = si.summary;
       document.getElementById("spatial-why").textContent = si.why_it_matters;
 
-      document.getElementById("pillars").innerHTML = si.pillars.map(p => `
-        <div class="pillar">
+      document.getElementById("pillars").innerHTML = si.pillars.map((p, i) => `
+        <div class="pillar reveal reveal-up" style="transition-delay:${i * 80}ms">
           <h4>${p.name}</h4>
           <p>${p.desc}</p>
         </div>
       `).join("");
 
-      document.getElementById("regions").innerHTML = data.global_snapshot.map(r => `
-        <article class="region-card">
+      document.getElementById("regions").innerHTML = data.global_snapshot.map((r, i) => `
+        <article class="region-card reveal reveal-up" style="transition-delay:${i * 100}ms">
           <h3>${r.flag} ${r.region}</h3>
           <ul>${r.highlights.map(h => `<li>${h}</li>`).join("")}</ul>
         </article>
       `).join("");
 
-      document.getElementById("trends").innerHTML = data.trends.map(t => `
-        <article class="trend-card ${t.tag}">
+      document.getElementById("trends").innerHTML = data.trends.map((t, i) => `
+        <article class="trend-card ${t.tag} reveal reveal-pop" style="transition-delay:${i * 100}ms">
           <span class="tag ${t.tag}">${t.tag}</span>
           <h4>${t.title}</h4>
           <p>${t.desc}</p>
         </article>
       `).join("");
+
+      observeReveals(document.getElementById("pillars").parentElement);
     }
 
     async function loadDigest() {
@@ -340,11 +486,16 @@
       document.getElementById("robotics-updated").textContent = updated;
       document.getElementById("spatial-updated").textContent = updated;
 
-      document.getElementById("robotics-feed-list").innerHTML =
-        (data.robotics || []).map(feedItem).join("") || "<p style='opacity:0.6'>No items yet.</p>";
+      const roboticsEl = document.getElementById("robotics-feed-list");
+      const spatialEl = document.getElementById("spatial-feed-list");
 
-      document.getElementById("spatial-feed-list").innerHTML =
-        (data.spatial || []).map(feedItem).join("") || "<p style='opacity:0.6'>No items yet.</p>";
+      roboticsEl.innerHTML = (data.robotics || []).map(feedItem).join("")
+        || "<p style='opacity:0.6'>No items yet.</p>";
+      spatialEl.innerHTML = (data.spatial || []).map(feedItem).join("")
+        || "<p style='opacity:0.6'>No items yet.</p>";
+
+      observeReveals(roboticsEl);
+      observeReveals(spatialEl);
     }
 
     loadOverview();
