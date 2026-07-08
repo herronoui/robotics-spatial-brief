@@ -614,6 +614,8 @@
           </div>
         </article>`;
     }
+
+    function timeAgo(iso) {
       if (!iso) return "";
       const h = Math.floor((Date.now() - new Date(iso)) / 3600000);
       if (h < 1) return "just now";
@@ -622,76 +624,89 @@
       return d < 7 ? d + "d ago" : new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric" });
     }
 
-    /* ── Data loading ── */
-    function timeAgo(iso) {
-      const res = await fetch("data/overview.json");
-      const data = await res.json();
-      const si = data.spatial_intelligence;
+    async function loadOverview() {
+      try {
+        const res = await fetch("data/overview.json");
+        if (!res.ok) throw new Error("overview fetch failed");
+        const data = await res.json();
+        const si = data.spatial_intelligence;
 
-      document.getElementById("spatial-title").textContent = si.title;
-      document.getElementById("spatial-summary").textContent = si.summary;
-      document.getElementById("spatial-why").textContent = si.why_it_matters;
+        document.getElementById("spatial-title").textContent = si.title;
+        document.getElementById("spatial-summary").textContent = si.summary;
+        document.getElementById("spatial-why").textContent = si.why_it_matters;
 
-      document.getElementById("pillars").innerHTML = si.pillars.map((p, i) => `
-        <div class="pillar reveal reveal-up" style="transition-delay:${i * 80}ms">
-          <div class="pillar-icon">${ICONS[p.icon] || ICONS.world}</div>
-          <h4>${p.name}</h4>
-          <p>${p.desc}</p>
-        </div>
-      `).join("");
-
-      if (data.stats) {
-        document.getElementById("stats-bar").innerHTML = data.stats.map((s, i) => `
-          <div class="stat-card reveal reveal-up" style="transition-delay:${i * 80}ms">
-            <div class="stat-value">${s.value}</div>
-            <div class="stat-label">${s.label}</div>
+        document.getElementById("pillars").innerHTML = si.pillars.map((p, i) => `
+          <div class="pillar reveal reveal-up" style="transition-delay:${i * 80}ms">
+            <div class="pillar-icon">${ICONS[p.icon] || ICONS.world}</div>
+            <h4>${p.name}</h4>
+            <p>${p.desc}</p>
           </div>
         `).join("");
+
+        if (data.stats) {
+          document.getElementById("stats-bar").innerHTML = data.stats.map((s, i) => `
+            <div class="stat-card reveal reveal-up" style="transition-delay:${i * 80}ms">
+              <div class="stat-value">${s.value}</div>
+              <div class="stat-label">${s.label}</div>
+            </div>
+          `).join("");
+        }
+
+        document.getElementById("regions").innerHTML = data.global_snapshot.map((r, i) => `
+          <article class="region-card reveal reveal-up" style="transition-delay:${i * 100}ms">
+            <div class="region-visual ${regionClass(r.region)}">${r.flag}</div>
+            <div class="region-body">
+              <h3>${r.region}</h3>
+              <ul>${r.highlights.map(h => `<li>${h}</li>`).join("")}</ul>
+            </div>
+          </article>
+        `).join("");
+
+        document.getElementById("trends").innerHTML = data.trends.map((t, i) => `
+          <article class="trend-card ${t.tag} reveal reveal-pop" style="transition-delay:${i * 100}ms">
+            <div class="trend-visual">${ICONS[t.icon] || ICONS.robot}</div>
+            <div class="trend-body">
+              <span class="tag ${t.tag}">${t.tag}</span>
+              <h4>${t.title}</h4>
+              <p>${t.desc}</p>
+            </div>
+          </article>
+        `).join("");
+
+        observeReveals(document.getElementById("stats-bar"));
+        observeReveals(document.getElementById("spatial"));
+        observeReveals(document.getElementById("world"));
+        observeReveals(document.querySelector(".section-charcoal"));
+      } catch (err) {
+        console.error("loadOverview failed:", err);
+        document.getElementById("regions").innerHTML = "<p style='opacity:0.6'>Could not load regions.</p>";
+        document.getElementById("trends").innerHTML = "<p style='opacity:0.6'>Could not load trends.</p>";
       }
-
-      document.getElementById("regions").innerHTML = data.global_snapshot.map((r, i) => `
-        <article class="region-card reveal reveal-up" style="transition-delay:${i * 100}ms">
-          <div class="region-visual ${regionClass(r.region)}">${r.flag}</div>
-          <div class="region-body">
-            <h3>${r.region}</h3>
-            <ul>${r.highlights.map(h => `<li>${h}</li>`).join("")}</ul>
-          </div>
-        </article>
-      `).join("");
-
-      document.getElementById("trends").innerHTML = data.trends.map((t, i) => `
-        <article class="trend-card ${t.tag} reveal reveal-pop" style="transition-delay:${i * 100}ms">
-          <div class="trend-visual">${ICONS[t.icon] || ICONS.robot}</div>
-          <div class="trend-body">
-            <span class="tag ${t.tag}">${t.tag}</span>
-            <h4>${t.title}</h4>
-            <p>${t.desc}</p>
-          </div>
-        </article>
-      `).join("");
-
-      observeReveals(document.getElementById("stats-bar"));
-      observeReveals(document.getElementById("pillars").parentElement);
     }
 
     async function loadDigest() {
-      const res = await fetch("data/digest.json");
-      const data = await res.json();
-      const updated = "Updated " + timeAgo(data.updated_at);
+      try {
+        const res = await fetch("data/digest.json");
+        if (!res.ok) throw new Error("digest fetch failed");
+        const data = await res.json();
+        const updated = "Updated " + timeAgo(data.updated_at);
 
-      document.getElementById("robotics-updated").textContent = updated;
-      document.getElementById("spatial-updated").textContent = updated;
+        document.getElementById("robotics-updated").textContent = updated;
+        document.getElementById("spatial-updated").textContent = updated;
 
-      const roboticsEl = document.getElementById("robotics-feed-list");
-      const spatialEl = document.getElementById("spatial-feed-list");
+        const roboticsEl = document.getElementById("robotics-feed-list");
+        const spatialEl = document.getElementById("spatial-feed-list");
 
-      roboticsEl.innerHTML = (data.robotics || []).map((i) => feedItem(i, "robotics")).join("")
-        || "<p style='opacity:0.6'>No items yet.</p>";
-      spatialEl.innerHTML = (data.spatial || []).map((i) => feedItem(i, "spatial")).join("")
-        || "<p style='opacity:0.6'>No items yet.</p>";
+        roboticsEl.innerHTML = (data.robotics || []).map((i) => feedItem(i, "robotics")).join("")
+          || "<p style='opacity:0.6'>No items yet.</p>";
+        spatialEl.innerHTML = (data.spatial || []).map((i) => feedItem(i, "spatial")).join("")
+          || "<p style='opacity:0.6'>No items yet.</p>";
 
-      observeReveals(roboticsEl);
-      observeReveals(spatialEl);
+        observeReveals(roboticsEl);
+        observeReveals(spatialEl);
+      } catch (err) {
+        console.error("loadDigest failed:", err);
+      }
     }
 
     loadOverview();
