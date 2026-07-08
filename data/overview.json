@@ -1,0 +1,86 @@
+{
+  "updated_at": "2026-07-07",
+  "spatial_intelligence": {
+    "title": "What is spatial intelligence?",
+    "summary": "Spatial intelligence is how machines understand and reason about the 3D world: where things are, how they relate, and what happens when agents move through space. It sits at the intersection of computer vision, robotics, and AI.",
+    "pillars": [
+      {
+        "name": "3D perception",
+        "desc": "Reconstructing scenes from cameras and sensors: depth, point clouds, NeRFs, Gaussian splatting, and SLAM."
+      },
+      {
+        "name": "World models",
+        "desc": "Learned simulators that predict how environments evolve. Used to train robot policies without endless real-world trials."
+      },
+      {
+        "name": "Spatial reasoning",
+        "desc": "Answering questions like \"what is behind that object?\" or \"can the arm reach that grasp?\" Requires geometric and semantic understanding together."
+      },
+      {
+        "name": "Embodied AI",
+        "desc": "Intelligence grounded in a body that moves. Vision-language-action models (VLAs) that map what they see to what they do."
+      }
+    ],
+    "why_it_matters": "Robots that only follow scripts fail in messy real environments. Spatial intelligence is what lets systems generalize: a humanoid in a new kitchen, a drone in changing weather, a surgical arm navigating tissue it has never seen."
+  },
+  "global_snapshot": [
+    {
+      "region": "United States",
+      "flag": "🇺🇸",
+      "highlights": [
+        "Humanoid race heating up: Figure, Tesla Optimus, 1X, Apptronik pushing toward factory deployment.",
+        "World models for robotics: NVIDIA Cosmos, Google DeepMind, Stanford and Berkeley labs training sim-to-real pipelines.",
+        "Defense and space robotics funding remains strong through DARPA and NASA programs."
+      ]
+    },
+    {
+      "region": "Europe",
+      "flag": "🇪🇺",
+      "highlights": [
+        "Industrial robotics leaders: ABB, KUKA, Universal Robots driving warehouse and manufacturing automation.",
+        "Strong research in safe human-robot collaboration and EU AI Act shaping deployment rules.",
+        "Mobile manipulation startups in Germany and Nordic countries focus on logistics."
+      ]
+    },
+    {
+      "region": "China & Asia",
+      "flag": "🌏",
+      "highlights": [
+        "Fastest scaling in humanoid and quadruped production, with heavy government and manufacturing backing.",
+        "DJI ecosystem dominance in aerial robotics; Unitree and others pushing affordable legged platforms.",
+        "Spatial AI research accelerating at Tsinghua, Shanghai AI Lab, and industry labs tied to EV supply chains."
+      ]
+    },
+    {
+      "region": "Japan & Korea",
+      "flag": "🇯🇵",
+      "highlights": [
+        "Decades of precision robotics in automotive and electronics now merging with AI perception stacks.",
+        "Soft robotics and caregiving robots remain national priorities amid aging demographics.",
+        "Hyundai-Boston Dynamics integration signals Korean industrial push into mobile manipulation."
+      ]
+    }
+  ],
+  "trends": [
+    {
+      "title": "Humanoids go commercial",
+      "desc": "2025–2026 is the shift from demo videos to pilot factory programs. The bottleneck is no longer walking. It is reliable manipulation and cost.",
+      "tag": "robotics"
+    },
+    {
+      "title": "World models replace hand-built sims",
+      "desc": "Teams train policies inside learned video simulators instead of painstakingly modeling every object. Spatial intelligence makes this possible.",
+      "tag": "spatial"
+    },
+    {
+      "title": "VLA models unify see and act",
+      "desc": "Vision-language-action models like RT-2, OpenVLA, and pi0 map pixels and language directly to motor commands, blurring the line between perception and control.",
+      "tag": "spatial"
+    },
+    {
+      "title": "Physical AI funding wave",
+      "desc": "Investors are betting on \"AI that touches the world\": industrial autonomy, surgical robots, and construction automation seeing record rounds.",
+      "tag": "robotics"
+    }
+  ]
+}

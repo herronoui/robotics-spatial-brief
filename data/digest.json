@@ -1,0 +1,308 @@
+{
+  "updated_at": "2026-07-08T00:34:44.229826+00:00",
+  "robotics": [
+    {
+      "title": "ABB Robotics includes vSLAM navigation in F712 autonomous forklift",
+      "summary": "The Flexley Stacy F712 forklift uses vision to navigate, works with other robots, and complies with safety standards, says ABB Robotics.",
+      "topic": "robotics",
+      "region": "Europe",
+      "source": "The Robot Report",
+      "voice": "Industry",
+      "url": "https://www.therobotreport.com/abb-robotics-includes-vslam-navigation-f712-autonomous-forklift/",
+      "published": "2026-07-07T20:24:24+00:00"
+    },
+    {
+      "title": "Tesollo initiates IPO process while developing humanoid hands",
+      "summary": "Tesollo, a South Korean robotic hand specialist, has officially begun preparations for its initial public offering.",
+      "topic": "robotics",
+      "region": "China & Asia",
+      "source": "The Robot Report",
+      "voice": "Industry",
+      "url": "https://www.therobotreport.com/tesollo-initiates-ipo-process-developing-humanoid-hands/",
+      "published": "2026-07-07T13:17:40+00:00"
+    },
+    {
+      "title": "The first American autonomous ground vehicles are fighting in Ukraine",
+      "summary": "Forterra has deployed more than 100 of its self-driving ATVs in conflict zones in Ukraine.",
+      "topic": "robotics",
+      "region": "Global",
+      "source": "TechCrunch Robotics",
+      "voice": "Startup Scene",
+      "url": "https://techcrunch.com/2026/07/07/the-first-american-autonomous-ground-vehicles-are-fighting-in-ukraine/",
+      "published": "2026-07-07T09:00:00+00:00"
+    },
+    {
+      "title": "HIVE brings in $15M to build physical AI for industrial machines",
+      "summary": "HIVE has deployed its technology across several sites in Scandinavia, operating autonomously across different machines.",
+      "topic": "robotics",
+      "region": "Global",
+      "source": "The Robot Report",
+      "voice": "Industry",
+      "url": "https://www.therobotreport.com/hive-brings-in-15m-to-build-physical-ai-for-industrial-machines/",
+      "published": "2026-07-07T06:55:51+00:00"
+    },
+    {
+      "title": "GigaWorld-1: A Roadmap to Build World Models for Robot Policy Evaluation",
+      "summary": "arXiv:2607.02642v1 Announce Type: new Abstract: Evaluating embodied robot foundation models remains a critical bottleneck; unlike large language models efficiently assessed via digital benchmarks,\u2026",
+      "topic": "robotics",
+      "region": "United States",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.02642",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "EVA-Client: A Unified Data Collection, Inference, and Deployment Framework for Embodied Policies on Real Robots",
+      "summary": "arXiv:2607.02646v1 Announce Type: new Abstract: We present EVA-Client, an open-source framework for deployment, data collection, and evaluation of trained manipulation policies on real robots.",
+      "topic": "robotics",
+      "region": "Global",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.02646",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "MorphQuad: Morphable Quadrotor for Superhuman Maneuverability, Manipulation, and Resiliency",
+      "summary": "arXiv:2607.02764v1 Announce Type: new Abstract: Infrastructure maintenance, contact-based inspection, and emergency response can benefit from aerial vehicles that act as a flying human hand with\u2026",
+      "topic": "robotics",
+      "region": "United States",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.02764",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "Metallic Ultrasound Waveguides as a Distributed Tactile Sensing Platform for Contact Localization, Force Estimation, and Material Class Discrimination",
+      "summary": "arXiv:2607.02827v1 Announce Type: new Abstract: Tactile sensing is central to how robotic systems interact with the real world, yet current solutions face a tradeoff between sensing area and system\u2026",
+      "topic": "robotics",
+      "region": "Global",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.02827",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "Differential Amplifier-Inspired AmpAttention for Multi-View Robotic Manipulation",
+      "summary": "arXiv:2607.02845v1 Announce Type: new Abstract: Multi-view robotic manipulation methods with the attention mechanism have recently achieved significant progress in both training efficiency and task\u2026",
+      "topic": "robotics",
+      "region": "Global",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.02845",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "Continuous-Time Gaussian Belief Trees for Motion Planning",
+      "summary": "arXiv:2607.02884v1 Announce Type: new Abstract: We address sampling-based motion planning for continuous-time stochastic systems under process and measurement uncertainty, with probabilistic\u2026",
+      "topic": "robotics",
+      "region": "Global",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.02884",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "Longitudinal-Motion-Aware Lateral Control for Autonomous Vehicles: A Robust Nonlinear Control Framework",
+      "summary": "arXiv:2607.02924v1 Announce Type: new Abstract: As autonomous vehicles (AVs) operate in increasingly dynamic traffic conditions, lateral control must be performed while longitudinal speed and\u2026",
+      "topic": "robotics",
+      "region": "United States",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.02924",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "Function-Space Diffusion for Motion Planning",
+      "summary": "arXiv:2607.02977v1 Announce Type: new Abstract: Diffusion-based motion planners have demonstrated strong performance in generating diverse and high-quality robot trajectories in cluttered\u2026",
+      "topic": "robotics",
+      "region": "Global",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.02977",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "Beyond Heuristics: A Standardized Real2Sim Pipeline for Physical Human Robot Interaction in Human-in-the-Loop Simulation",
+      "summary": "arXiv:2607.03017v1 Announce Type: new Abstract: The aging global population drives demand for assistive robots, yet the safety risks and costs of physical testing make Human-in-the-Loop (HITL)\u2026",
+      "topic": "robotics",
+      "region": "United States",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.03017",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "DRBA: Dynamic Robotic Balance Assistant -- An assist-as-needed gait and balance rehabilitation robot for versatile training",
+      "summary": "arXiv:2607.03027v1 Announce Type: new Abstract: The decline of human balance control due to aging and pathological conditions increases fall risk, a major concern in geriatric care and rehabilitation.",
+      "topic": "robotics",
+      "region": "United States",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.03027",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "Hope for the Best, Prepare for the Worst: Occlusion-Aware Contingency Planning for Autonomous Vehicles",
+      "summary": "arXiv:2607.03155v1 Announce Type: new Abstract: The deployment of autonomous vehicles in urban environments introduces significant safety challenges, particularly in scenarios with occlusions, where\u2026",
+      "topic": "robotics",
+      "region": "Global",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.03155",
+      "published": "2026-07-07T04:00:00+00:00"
+    }
+  ],
+  "spatial": [
+    {
+      "title": "TACO: TActile World Model as a Self-COrrector forScalable VLA Post-Training",
+      "summary": "arXiv:2607.02840v1 Announce Type: new Abstract: Vision-Language-Action (VLA) models have shown promising generalization in robotic manipulation, but they still struggle with contact-rich tasks,\u2026",
+      "topic": "spatial",
+      "region": "Global",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.02840",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "CLEAR: Closed-Loop Reinforcement Learning at Scale for End-to-End Autonomous Driving",
+      "summary": "arXiv:2607.02841v1 Announce Type: new Abstract: End-to-end autonomous driving (E2E-AD) aims to directly map raw sensor information to driving actions.",
+      "topic": "spatial",
+      "region": "United States",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.02841",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "DREAMSTEER: Latent World Models Can Steer VLA Policies During Deployment Without Any Finetuning",
+      "summary": "arXiv:2607.02865v1 Announce Type: new Abstract: Pretrained vision-language-action (VLA) policies show promising zero-shot generalization, but often fail under deployment-time distribution shift,\u2026",
+      "topic": "spatial",
+      "region": "United States",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.02865",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "Exp2VLA: Enabling Vision-Language-Action for Drone Navigation from Expert Demonstrations",
+      "summary": "arXiv:2607.03146v1 Announce Type: new Abstract: Vision-language-action (VLA) models open a new path toward intuitive robot control by directly linking perception, language, and action in a single\u2026",
+      "topic": "spatial",
+      "region": "Global",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.03146",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "AnchorVLA: Bridging Discrete Decisions and Continuous Trajectories for Vision-Language-Action Planning",
+      "summary": "arXiv:2607.03182v1 Announce Type: new Abstract: Autonomous driving planning requires translating navigation intent, traffic rules, dynamic interactions, and language instructions into executable\u2026",
+      "topic": "spatial",
+      "region": "United States",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.03182",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "GDPR-Aware Trajectory Sharing for ISAC-Assisted Robot Navigation: A Case Study on FID-Constrained Collision Prediction",
+      "summary": "arXiv:2607.03254v1 Announce Type: new Abstract: Integrated sensing and communication (ISAC) enables intelligent wireless infrastructure but raises growing regulatory concern as fine-grained personal\u2026",
+      "topic": "spatial",
+      "region": "United States",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.03254",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "Closed-loop vs. Open-loop Kalman Filter Architectures in Airborne Aided Inertial Navigation",
+      "summary": "arXiv:2607.03338v1 Announce Type: new Abstract: Closed-loop (or feedback) error-state Kalman filters with their relatives and offspring are the state-of-the-art in modern aided inertial navigation\u2026",
+      "topic": "spatial",
+      "region": "Global",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.03338",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "Feeling the Unexpected: ResTacVLA for Contact-Rich Manipulation via Residual Tactile Representation",
+      "summary": "arXiv:2607.03387v1 Announce Type: new Abstract: Tactile perception is indispensable for contact-rich manipulation, yet integrating it into Vision-Language-Action (VLA) models often induces modality\u2026",
+      "topic": "spatial",
+      "region": "United States",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.03387",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "HiMe: Hierarchical Embodied Memory for Long-Horizon Vision-Language-Action Control",
+      "summary": "arXiv:2607.03449v1 Announce Type: new Abstract: Current Vision-Language-Action (VLA) models excel at robotic manipulation but often struggle with non-Markovian tasks requiring long-term memory and\u2026",
+      "topic": "spatial",
+      "region": "Global",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.03449",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "CoRE-VLA: Towards Scalable and Robust Vision-Language-Action Modeling via Conditional Routing of Experts",
+      "summary": "arXiv:2607.03693v1 Announce Type: new Abstract: Vision-language-action (VLA) models have advanced generalist robotic manipulation, yet real-world deployment reveals a fundamental challenge: robots\u2026",
+      "topic": "spatial",
+      "region": "United States",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.03693",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "Lost in Time? Continuous Symmetry and Identifiability in Aided Inertial Navigation with Unknown Measurement Delays",
+      "summary": "arXiv:2607.03699v1 Announce Type: new Abstract: In many multisensor systems, measurements from different sensors are subject to unknown relative time delays.",
+      "topic": "spatial",
+      "region": "Global",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.03699",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "Look Before You Leap: Distilling Tree Search into Action Evaluation for Frozen VLA Models",
+      "summary": "arXiv:2607.03751v1 Announce Type: new Abstract: Vision-Language-Action (VLA) models acquire broad embodied capabilities through large-scale pretraining, yet their generalization remains far more\u2026",
+      "topic": "spatial",
+      "region": "Global",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.03751",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "From Region Arrival to Instance-Level Grounding in Vision-and-Language Navigation",
+      "summary": "arXiv:2607.03792v1 Announce Type: new Abstract: Vision-and-Language Navigation (VLN) agents may satisfy conventional success criteria while still failing to establish reliable object-level\u2026",
+      "topic": "spatial",
+      "region": "United States",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.03792",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "LH-AVLN: A Benchmark for Long-Horizon Audio-Visual-Language Navigation",
+      "summary": "arXiv:2607.03920v1 Announce Type: new Abstract: Embodied navigation is moving toward long-horizon missions, yet existing long-horizon benchmarks are largely acoustically silent, and audio-visual\u2026",
+      "topic": "spatial",
+      "region": "Global",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.03920",
+      "published": "2026-07-07T04:00:00+00:00"
+    },
+    {
+      "title": "WSA$_1$: a 3D-Centric World-Spatial-Action Model for Generalizable Robot Control",
+      "summary": "arXiv:2607.03941v1 Announce Type: new Abstract: Recent advances in embodied AI have established robot foundation models (RFMs) as the dominant approach for generalist robotic systems to date.",
+      "topic": "spatial",
+      "region": "United States",
+      "source": "arXiv Robotics",
+      "voice": "Global Research",
+      "url": "https://arxiv.org/abs/2607.03941",
+      "published": "2026-07-07T04:00:00+00:00"
+    }
+  ],
+  "all_count": 841
+}
