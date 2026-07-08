@@ -6,18 +6,22 @@
     "pillars": [
       {
         "name": "3D perception",
+        "icon": "perception",
         "desc": "Reconstructing scenes from cameras and sensors: depth, point clouds, NeRFs, Gaussian splatting, and SLAM."
       },
       {
         "name": "World models",
+        "icon": "world",
         "desc": "Learned simulators that predict how environments evolve. Used to train robot policies without endless real-world trials."
       },
       {
         "name": "Spatial reasoning",
+        "icon": "reasoning",
         "desc": "Answering questions like \"what is behind that object?\" or \"can the arm reach that grasp?\" Requires geometric and semantic understanding together."
       },
       {
         "name": "Embodied AI",
+        "icon": "embodied",
         "desc": "Intelligence grounded in a body that moves. Vision-language-action models (VLAs) that map what they see to what they do."
       }
     ],
@@ -64,23 +68,33 @@
   "trends": [
     {
       "title": "Humanoids go commercial",
+      "icon": "humanoid",
       "desc": "2025–2026 is the shift from demo videos to pilot factory programs. The bottleneck is no longer walking. It is reliable manipulation and cost.",
       "tag": "robotics"
     },
     {
       "title": "World models replace hand-built sims",
+      "icon": "sim",
       "desc": "Teams train policies inside learned video simulators instead of painstakingly modeling every object. Spatial intelligence makes this possible.",
       "tag": "spatial"
     },
     {
       "title": "VLA models unify see and act",
+      "icon": "vla",
       "desc": "Vision-language-action models like RT-2, OpenVLA, and pi0 map pixels and language directly to motor commands, blurring the line between perception and control.",
       "tag": "spatial"
     },
     {
       "title": "Physical AI funding wave",
+      "icon": "funding",
       "desc": "Investors are betting on \"AI that touches the world\": industrial autonomy, surgical robots, and construction automation seeing record rounds.",
       "tag": "robotics"
     }
+  ],
+  "stats": [
+    { "value": "30+", "label": "Headlines tracked" },
+    { "value": "8", "label": "Global sources" },
+    { "value": "4", "label": "Regions covered" },
+    { "value": "2", "label": "Topic streams" }
   ]
 }

@@ -192,6 +192,13 @@
       border-radius: 14px; padding: 1.15rem;
       transition: transform 0.35s var(--ease-out), background 0.35s, border-color 0.35s;
     }
+    .pillar-icon {
+      width: 64px; height: 64px; border-radius: 16px;
+      background: rgba(217, 122, 74, 0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.85rem;
+    }
+    .pillar-icon svg { width: 36px; height: 36px; stroke: var(--orange-light); fill: none; stroke-width: 1.8; }
     .pillar:hover {
       transform: translateY(-6px) scale(1.02);
       background: rgba(255,255,255,0.14);
@@ -203,15 +210,29 @@
     .regions { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
     .region-card {
       background: rgba(255,255,255,0.55); border: 1px solid rgba(45,74,62,0.12);
-      border-radius: 16px; padding: 1.25rem;
+      border-radius: 16px; overflow: hidden;
       transition: transform 0.35s var(--ease-out), border-color 0.35s, box-shadow 0.35s;
     }
+    .region-visual {
+      height: 100px; display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; position: relative; overflow: hidden;
+    }
+    .region-visual.us { background: linear-gradient(135deg, #3d5a80, #2d4a3e); }
+    .region-visual.eu { background: linear-gradient(135deg, #4a6741, #2d4a3e); }
+    .region-visual.asia { background: linear-gradient(135deg, #8b4513, #2d4a3e); }
+    .region-visual.jp { background: linear-gradient(135deg, #6b4c7a, #2d4a3e); }
+    .region-visual::after {
+      content: ""; position: absolute; inset: 0; opacity: 0.15;
+      background: radial-gradient(circle at 30% 40%, #fff 1px, transparent 1px);
+      background-size: 12px 12px;
+    }
+    .region-body { padding: 1.25rem; }
     .region-card:hover {
       transform: translateY(-8px) rotate(-0.5deg);
       border-color: var(--orange);
       box-shadow: 0 16px 40px rgba(45, 74, 62, 0.12);
     }
-    .region-card h3 { font-size: 1.05rem; color: var(--green); margin-bottom: 0.75rem; }
+    .region-body h3 { font-size: 1.05rem; color: var(--green); margin-bottom: 0.75rem; }
     .region-card ul { list-style: none; }
     .region-card li {
       font-size: 0.84rem; color: #444; padding: 0.4rem 0;
@@ -223,10 +244,17 @@
 
     .trends { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
     .trend-card {
-      background: rgba(255,255,255,0.12); border-radius: 14px; padding: 1.25rem;
-      border-left: 4px solid var(--orange);
+      background: rgba(255,255,255,0.12); border-radius: 14px; padding: 0;
+      border-left: 4px solid var(--orange); overflow: hidden;
       transition: transform 0.35s var(--ease-pop), box-shadow 0.35s;
     }
+    .trend-visual {
+      height: 110px; display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.2);
+    }
+    .trend-visual svg { width: 56px; height: 56px; stroke: var(--orange-light); fill: none; stroke-width: 1.6; }
+    .trend-card.spatial .trend-visual svg { stroke: #7ec8a8; }
+    .trend-body { padding: 1.15rem 1.25rem 1.25rem; }
     .trend-card:hover {
       transform: scale(1.04) translateY(-4px);
       box-shadow: 0 12px 32px rgba(0,0,0,0.25);
@@ -243,12 +271,32 @@
 
     .feed-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
     .updated { font-size: 0.78rem; opacity: 0.6; }
-    .feed { display: grid; gap: 0.85rem; }
+    .feed { display: grid; gap: 1rem; }
     .feed-item {
+      display: grid; grid-template-columns: 120px 1fr; gap: 0;
       background: rgba(255,255,255,0.06); border: 1px solid rgba(242,227,201,0.12);
-      border-radius: 14px; padding: 1.1rem 1.25rem;
+      border-radius: 14px; overflow: hidden;
       transition: border-color 0.3s, transform 0.35s var(--ease-out), box-shadow 0.35s;
     }
+    .feed-thumb {
+      position: relative; min-height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .feed-thumb.robotics { background: linear-gradient(160deg, #3d6b5a, #1e3329); }
+    .feed-thumb.spatial { background: linear-gradient(160deg, #4a6741, #2a3d52); }
+    .feed-thumb img {
+      width: 48px; height: 48px; border-radius: 12px;
+      object-fit: cover; background: #fff; padding: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25); position: relative; z-index: 1;
+    }
+    .feed-thumb .thumb-icon {
+      position: absolute; inset: 0; opacity: 0.12;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feed-thumb .thumb-icon svg { width: 80px; height: 80px; stroke: #fff; fill: none; stroke-width: 1; }
+    .feed-body { padding: 1rem 1.15rem; }
+    .section-cream .feed-item { background: #fff; border-color: rgba(45,74,62,0.1); }
     .feed-item:hover {
       border-color: var(--orange);
       transform: translateX(8px) scale(1.01);
@@ -259,7 +307,63 @@
     .feed-item h3 a { color: inherit; text-decoration: none; }
     .feed-item h3 a:hover { color: var(--orange-light); }
     .feed-item p { font-size: 0.84rem; opacity: 0.8; line-height: 1.55; }
-    .section-cream .feed-item { background: #fff; border-color: rgba(45,74,62,0.1); }
+
+    /* ── Stats bar ── */
+    .stats-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+      max-width: 1100px; margin: -3rem auto 0; padding: 0 2rem;
+      position: relative; z-index: 5;
+    }
+    .stat-card {
+      background: #fff; border-radius: 16px; padding: 1.25rem;
+      text-align: center; box-shadow: 0 8px 32px rgba(45,74,62,0.12);
+      border: 1px solid rgba(45,74,62,0.08);
+      transition: transform 0.35s var(--ease-pop);
+    }
+    .stat-card:hover { transform: translateY(-6px) scale(1.03); }
+    .stat-value {
+      font-family: "Fraunces", serif; font-size: 2rem; font-weight: 900;
+      color: var(--orange); line-height: 1;
+    }
+    .stat-label { font-size: 0.78rem; color: #666; margin-top: 0.35rem; }
+
+    /* ── Spatial diagram ── */
+    .spatial-layout {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;
+      align-items: center; margin-bottom: 2rem;
+    }
+    .spatial-diagram {
+      background: rgba(255,255,255,0.06); border-radius: 20px;
+      padding: 1.5rem; border: 1px solid rgba(242,227,201,0.15);
+    }
+    .flow-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+    }
+    .flow-node {
+      flex: 1; text-align: center; padding: 1rem 0.5rem;
+      background: rgba(217,122,74,0.15); border-radius: 12px;
+      border: 1px dashed rgba(242,227,201,0.3);
+    }
+    .flow-node svg { width: 32px; height: 32px; stroke: var(--orange-light); fill: none; margin-bottom: 0.35rem; }
+    .flow-node span { display: block; font-size: 0.72rem; font-weight: 600; opacity: 0.9; }
+    .flow-arrow { color: var(--orange); font-size: 1.25rem; flex-shrink: 0; }
+
+    /* ── Hero scene ── */
+    .hero-scene {
+      position: relative; height: 340px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-scene svg.main-illus {
+      width: 100%; max-width: 380px; height: auto;
+      filter: drop-shadow(0 16px 32px rgba(45,74,62,0.2));
+    }
+    .grid-floor {
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 320px; height: 80px;
+      background: linear-gradient(180deg, transparent, rgba(45,74,62,0.08));
+      border-radius: 50%; opacity: 0.6;
+    }
+
     .section-cream .feed-item h3 a { color: var(--green); }
     .section-cream .feed-item h3 a:hover { color: var(--orange); }
 
@@ -283,7 +387,10 @@
     @media (max-width: 768px) {
       .hero { min-height: auto; padding-top: 6rem; }
       .hero-inner { grid-template-columns: 1fr; }
-      .globe-art { height: 200px; }
+      .hero-scene, .globe-art { height: 220px; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); margin-top: -2rem; }
+      .spatial-layout { grid-template-columns: 1fr; }
+      .feed-item { grid-template-columns: 80px 1fr; }
       .nav-links { display: none; }
       section { padding: 3rem 1.25rem; }
     }
@@ -313,20 +420,58 @@
         </p>
         <a class="btn reveal reveal-up visible" href="#spatial" style="transition-delay:240ms">Start reading ↓</a>
       </div>
-      <div class="globe-art reveal reveal-scale visible" style="transition-delay:180ms" id="globe-wrap">
-        <div class="orbit a"></div>
-        <div class="orbit b"></div>
-        <div class="globe" id="globe"></div>
-        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="hero-scene reveal reveal-scale visible" style="transition-delay:180ms" id="hero-scene">
+        <div class="grid-floor"></div>
+        <svg class="main-illus" viewBox="0 0 380 280" aria-hidden="true">
+          <!-- Robot arm -->
+          <rect x="60" y="200" width="80" height="12" rx="4" fill="#2d4a3e"/>
+          <rect x="95" y="120" width="14" height="90" rx="4" fill="#3d6b5a"/>
+          <rect x="60" y="115" width="60" height="14" rx="4" fill="#3d6b5a" transform="rotate(-35 95 122)"/>
+          <rect x="30" y="85" width="50" height="12" rx="4" fill="#d97a4a" transform="rotate(-55 55 91)"/>
+          <circle cx="28" cy="82" r="8" fill="none" stroke="#d97a4a" stroke-width="2"/>
+          <!-- 3D grid / spatial scene -->
+          <g opacity="0.5" stroke="#2d4a3e" stroke-width="1" fill="none">
+            <line x1="200" y1="180" x2="360" y2="180"/><line x1="200" y1="200" x2="360" y2="200"/>
+            <line x1="200" y1="220" x2="360" y2="220"/><line x1="220" y1="160" x2="220" y2="240"/>
+            <line x1="260" y1="160" x2="260" y2="240"/><line x1="300" y1="160" x2="300" y2="240"/>
+            <line x1="340" y1="160" x2="340" y2="240"/>
+          </g>
+          <!-- Point cloud dots -->
+          <circle cx="240" cy="190" r="4" fill="#d97a4a"/><circle cx="280" cy="175" r="3" fill="#d97a4a"/>
+          <circle cx="320" cy="210" r="5" fill="#d97a4a"/><circle cx="300" cy="195" r="3" fill="#7ec8a8"/>
+          <circle cx="260" cy="215" r="4" fill="#7ec8a8"/>
+          <!-- Bounding box -->
+          <rect x="225" y="165" width="110" height="55" rx="2" fill="none" stroke="#d97a4a" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.7"/>
+          <!-- Eye / camera -->
+          <circle cx="170" cy="100" r="22" fill="none" stroke="#2d4a3e" stroke-width="2"/>
+          <circle cx="170" cy="100" r="10" fill="#d97a4a" opacity="0.6"/>
+          <line x1="170" y1="100" x2="225" y2="165" stroke="#d97a4a" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
+        </svg>
       </div>
     </div>
   </div>
 
+  <div class="stats-bar stagger" id="stats-bar"></div>
+
   <section class="section-green" id="spatial">
     <div class="section-inner">
-      <h2 class="section-title reveal reveal-up" id="spatial-title">Spatial intelligence</h2>
-      <p class="section-sub reveal reveal-up" id="spatial-summary" style="color:rgba(242,227,201,0.8);transition-delay:80ms"></p>
-      <p class="reveal reveal-up" id="spatial-why" style="font-size:0.95rem;margin-bottom:0.5rem;transition-delay:160ms"></p>
+      <div class="spatial-layout">
+        <div>
+          <h2 class="section-title reveal reveal-up" id="spatial-title">Spatial intelligence</h2>
+          <p class="section-sub reveal reveal-up" id="spatial-summary" style="color:rgba(242,227,201,0.8);transition-delay:80ms"></p>
+          <p class="reveal reveal-up" id="spatial-why" style="font-size:0.95rem;transition-delay:160ms"></p>
+        </div>
+        <div class="spatial-diagram reveal reveal-right">
+          <p style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;opacity:0.6;margin-bottom:1rem;text-align:center">How it works</p>
+          <div class="flow-row">
+            <div class="flow-node"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg><span>See</span></div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-node"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg><span>Understand 3D</span></div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-node"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg><span>Act</span></div>
+          </div>
+        </div>
+      </div>
       <div class="pillars stagger" id="pillars"></div>
     </div>
   </section>
@@ -391,15 +536,15 @@
     /* ── Scroll progress + nav ── */
     const nav = document.getElementById("nav");
     const progress = document.getElementById("scroll-progress");
-    const globeWrap = document.getElementById("globe-wrap");
+    const heroScene = document.getElementById("hero-scene");
 
     window.addEventListener("scroll", () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       progress.style.width = (scrollTop / docHeight * 100) + "%";
       nav.classList.toggle("scrolled", scrollTop > 60);
-      if (globeWrap) {
-        globeWrap.style.transform = `translateY(${scrollTop * 0.12}px)`;
+      if (heroScene) {
+        heroScene.style.transform = `translateY(${scrollTop * 0.1}px)`;
       }
     }, { passive: true });
 
@@ -421,8 +566,54 @@
 
     observeReveals();
 
-    /* ── Data loading ── */
-    function timeAgo(iso) {
+    /* ── SVG icons ── */
+    const ICONS = {
+      perception: `<svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`,
+      world: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+      reasoning: `<svg viewBox="0 0 24 24"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.5V20h6v-2.5c2.9-1.2 5-4.1 5-7.5a8 8 0 0 0-8-8z"/><line x1="10" y1="22" x2="14" y2="22"/></svg>`,
+      embodied: `<svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="6" rx="1"/><path d="M12 8v6M8 22v-4l4-4 4 4v4"/><line x1="6" y1="14" x2="18" y2="14"/></svg>`,
+      humanoid: `<svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"/><path d="M12 8v5M8 22v-6l4-3 4 3v6"/><line x1="8" y1="13" x2="16" y2="13"/></svg>`,
+      sim: `<svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><polygon points="10,8 14,8 12,12"/></svg>`,
+      vla: `<svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+      funding: `<svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+      robot: `<svg viewBox="0 0 24 24"><rect x="6" y="8" width="12" height="10" rx="2"/><circle cx="9" cy="13" r="1.5" fill="currentColor"/><circle cx="15" cy="13" r="1.5" fill="currentColor"/><path d="M12 2v4M8 4h8"/></svg>`,
+      brain: `<svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 2 1 4 2 5v6h10v-6c1-1 2-3 2-5 0-4-3-7-7-7z"/></svg>`,
+    };
+
+    function regionClass(name) {
+      if (name.includes("United States")) return "us";
+      if (name.includes("Europe")) return "eu";
+      if (name.includes("Asia")) return "asia";
+      return "jp";
+    }
+
+    function feedDomain(url) {
+      try { return new URL(url).hostname.replace("www.", ""); } catch { return ""; }
+    }
+
+    function feedItem(item, topic) {
+      const domain = feedDomain(item.url);
+      const favicon = domain
+        ? `https://www.google.com/s2/favicons?domain=${domain}&sz=128`
+        : "";
+      const icon = topic === "spatial" ? ICONS.brain : ICONS.robot;
+      return `
+        <article class="feed-item reveal reveal-up">
+          <div class="feed-thumb ${topic}">
+            <div class="thumb-icon">${icon}</div>
+            ${favicon ? `<img src="${favicon}" alt="" loading="lazy" onerror="this.style.display='none'"/>` : ""}
+          </div>
+          <div class="feed-body">
+            <div class="feed-meta">
+              <span>${item.region}</span><span>·</span>
+              <span>${item.voice}</span><span>·</span>
+              <span>${timeAgo(item.published)}</span>
+            </div>
+            <h3><a href="${item.url}" target="_blank" rel="noopener">${item.title}</a></h3>
+            <p>${item.summary}</p>
+          </div>
+        </article>`;
+    }
       if (!iso) return "";
       const h = Math.floor((Date.now() - new Date(iso)) / 3600000);
       if (h < 1) return "just now";
@@ -431,20 +622,8 @@
       return d < 7 ? d + "d ago" : new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric" });
     }
 
-    function feedItem(item) {
-      return `
-        <article class="feed-item reveal reveal-up">
-          <div class="feed-meta">
-            <span>${item.region}</span><span>·</span>
-            <span>${item.voice}</span><span>·</span>
-            <span>${timeAgo(item.published)}</span>
-          </div>
-          <h3><a href="${item.url}" target="_blank" rel="noopener">${item.title}</a></h3>
-          <p>${item.summary}</p>
-        </article>`;
-    }
-
-    async function loadOverview() {
+    /* ── Data loading ── */
+    function timeAgo(iso) {
       const res = await fetch("data/overview.json");
       const data = await res.json();
       const si = data.spatial_intelligence;
@@ -455,26 +634,43 @@
 
       document.getElementById("pillars").innerHTML = si.pillars.map((p, i) => `
         <div class="pillar reveal reveal-up" style="transition-delay:${i * 80}ms">
+          <div class="pillar-icon">${ICONS[p.icon] || ICONS.world}</div>
           <h4>${p.name}</h4>
           <p>${p.desc}</p>
         </div>
       `).join("");
 
+      if (data.stats) {
+        document.getElementById("stats-bar").innerHTML = data.stats.map((s, i) => `
+          <div class="stat-card reveal reveal-up" style="transition-delay:${i * 80}ms">
+            <div class="stat-value">${s.value}</div>
+            <div class="stat-label">${s.label}</div>
+          </div>
+        `).join("");
+      }
+
       document.getElementById("regions").innerHTML = data.global_snapshot.map((r, i) => `
         <article class="region-card reveal reveal-up" style="transition-delay:${i * 100}ms">
-          <h3>${r.flag} ${r.region}</h3>
-          <ul>${r.highlights.map(h => `<li>${h}</li>`).join("")}</ul>
+          <div class="region-visual ${regionClass(r.region)}">${r.flag}</div>
+          <div class="region-body">
+            <h3>${r.region}</h3>
+            <ul>${r.highlights.map(h => `<li>${h}</li>`).join("")}</ul>
+          </div>
         </article>
       `).join("");
 
       document.getElementById("trends").innerHTML = data.trends.map((t, i) => `
         <article class="trend-card ${t.tag} reveal reveal-pop" style="transition-delay:${i * 100}ms">
-          <span class="tag ${t.tag}">${t.tag}</span>
-          <h4>${t.title}</h4>
-          <p>${t.desc}</p>
+          <div class="trend-visual">${ICONS[t.icon] || ICONS.robot}</div>
+          <div class="trend-body">
+            <span class="tag ${t.tag}">${t.tag}</span>
+            <h4>${t.title}</h4>
+            <p>${t.desc}</p>
+          </div>
         </article>
       `).join("");
 
+      observeReveals(document.getElementById("stats-bar"));
       observeReveals(document.getElementById("pillars").parentElement);
     }
 
@@ -489,9 +685,9 @@
       const roboticsEl = document.getElementById("robotics-feed-list");
       const spatialEl = document.getElementById("spatial-feed-list");
 
-      roboticsEl.innerHTML = (data.robotics || []).map(feedItem).join("")
+      roboticsEl.innerHTML = (data.robotics || []).map((i) => feedItem(i, "robotics")).join("")
         || "<p style='opacity:0.6'>No items yet.</p>";
-      spatialEl.innerHTML = (data.spatial || []).map(feedItem).join("")
+      spatialEl.innerHTML = (data.spatial || []).map((i) => feedItem(i, "spatial")).join("")
         || "<p style='opacity:0.6'>No items yet.</p>";
 
       observeReveals(roboticsEl);
